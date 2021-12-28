@@ -1,4 +1,6 @@
-import React, { useState, useCallback } from 'react';
+/* eslint-disable */
+
+import React, { useState, useCallback, useMemo } from 'react';
 import _isEmpty from 'lodash/isEmpty';
 import moment from 'moment';
 import exportCSV from './export-csv';
@@ -154,7 +156,7 @@ function App() {
     [cacheTableData],
   );
 
-  const exportExcel = useCallback(
+  const exportExcel = useMemo(
     () => {
       exportCSV(csvTitle, columns, tableData);
     },
