@@ -66,7 +66,7 @@ function App() {
 
         return (
           <div>
-            <p>打卡次数: {clockTimeList.length}</p>
+            <p>打卡次数: {clockTimeList.length}{text || ''}</p>
             <p className={hasTwoClock ? 'detail-status-green' : 'detail-status-red'}>打卡状态: {hasTwoClock ? '已完成' : '未完成'}</p>
             {!onlyOneTime && <p>工作时长: <span className="detail-workTime">{workTime}</span></p>}
           </div>
@@ -158,7 +158,7 @@ function App() {
     () => {
       exportCSV(csvTitle, columns, tableData);
     },
-    [tableData, csvTitle],
+    [tableData, csvTitle, columns],
   );
 
   return (
@@ -208,12 +208,12 @@ function App() {
 }
 
 const listToWorkTime = list => {
-  var workTime = 0;
-  var startTime = list[0];
-  var endTime = list[list.length - 1];
+  let workTime = 0;
+  const startTime = list[0];
+  const endTime = list[list.length - 1];
 
-  var workTimeFloat = moment(endTime).diff(moment(startTime), 'minute') / 60;
-  var workTime = parseInt(workTimeFloat * 100) / 100;
+  const workTimeFloat = moment(endTime).diff(moment(startTime), 'minute') / 60;
+  workTime = parseInt(workTimeFloat * 100) / 100;
   return workTime;
 }
 
